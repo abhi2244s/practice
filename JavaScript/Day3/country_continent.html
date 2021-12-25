@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select id="continent">
+        <option>India</option>
+        <option>USA</option>
+        <option>RSA</option>
+        <option>AUS</option>
+        <option>NZ</option>
+        <option>ENG</option>
+
+    </select>
+    
+    <button onclick="country_continent()">FInd Continet</button>
+
+    <script type="text/javascript">
+
+        function country_continent(){
+            var country = document.getElementById('continent').value
+
+            switch(country){
+                case "India":
+                    alert("Asia")
+                    break
+                case "USA":
+                    alert("AB")
+                    break;
+                case "RSA":
+                    alert("ABC")
+                    break;
+                case "AUS":
+                    alert("ABCD")
+                    break;
+                case "NZ":
+                    alert("ABCDE")
+                    break; 
+                case "ENG":
+                    alert("ABCDEF")
+                    break;   
+            }
+        }
+
+
+    </script>
+</body>
+</html>
