@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>My color should change when I double click the button!</h1>
+  <button id="btn">Click here to change my color</button>
+  <script type="text/javascript">
+
+        function random(num){
+            return Math.floor(Math.random()*num);
+        }
+
+        var button = document.getElementById('btn')
+
+        function switchColorText(){
+            var randomColor='rgb('+random(255)+','+random(255)+','+random(255)+')';
+            button.style.color=randomColor
+        }
+        button.addEventListener('dblclick', switchColorText);
+        
+
+
+  </script>
+</body>
+</html>
