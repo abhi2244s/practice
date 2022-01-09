@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="res"></div>
+    
+
+    <script type="text/javascript">
+        window.addEventListener('load',function(){
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET','https://reqres.in/api/users')
+            xhr.send()
+            xhr.onload =function(){
+               var data = JSON.parse(this.response)
+               console.log(data)
+               renderDom(data)
+               
+            }
+        })
+        function renderDom(data){
+            var active = data.page
+            var total =data.total
+            var per_page = data.per_page
+            var total_pages= data.total_pages
+            var arr = data.data
+
+            var res = document.getElementById('res')
+
+           arr.forEach(function(user){
+               var div = createCard(user)
+               res.append(div)
+ 
+           })
+        }
+        function createCard(user){
+           var div = document.createElement('div')
+
+           var emailDiv = document.createElement('div')
+            
+           emailDiv.innerText = "Email :" + user.email
+
+           var name = document.createElement('div')
+           name.innerText = "Full name:" + user.first_name + ' '+user.last_name
+
+           var a =document.createElement('a')
+           a.href='user.html?id='+user.id
+
+           var img = document.createElement('img')
+           img.setAttribute('src',user.avatar)
+           a.append(img)
+
+           div.append(emailDiv,name,a)
+           div.style.border="1px solid black"
+           return div
+        }
+
+
+    </script>
+</body>
+</html>

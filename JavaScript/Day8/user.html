@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="res">
+
+    </div>
+
+
+    <script type="text/javascript">
+       window.addEventListener('load',function(){
+           var query = new URLSearchParams(location.search)
+           var id = query.get('id')
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET','https://reqres.in/api/users/'+id)
+            xhr.send()
+            xhr.onload =function(){
+                if(this.status==200){
+                var data = JSON.parse(this.response)
+               console.log(data)
+               renderDom(data)
+                }
+                else if (this.status>=400){
+                var res= document.getElementById('res')
+                res.innerText ="Error not user found"
+                }
+          
+               
+            }
+        })
+
+        function renderDom(data){
+
+            var user = data.data
+
+            var res = document.getElementById('res')
+            
+            var div = createCard(user)
+               res.append(div)
+ 
+        }
+
+
+        function createCard(user){
+           var div = document.createElement('div')
+
+           var emailDiv = document.createElement('div')
+            
+           emailDiv.innerText = "Email :" + user.email
+
+           var name = document.createElement('div')
+           name.innerText = "Full name:" + user.first_name + ' '+user.last_name
+
+    
+
+           var img = document.createElement('img')
+           img.setAttribute('src',user.avatar)
+    
+
+           div.append(emailDiv,name,img)
+           div.style.border="1px solid black"
+           return div
+        }
+    </script>
+</body>
+</html>
