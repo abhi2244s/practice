@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <select id="select">
+        <option value="android">Android</option>
+        <option value="ubuntu">Ubuntu</option>
+        <option value="windows">windows</option>
+        <option value="macos">macos</option>
+    </select>
+    <button id="button">Get</button>
+    <hr />
+
+    <div id="res"></div>
+
+
+    <script type="text/javascript">
+
+
+        function getData() {
+
+            var select = document.getElementById('select').value
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET','http://localhost:8080/codenames/'+select)
+            xhr.send()
+            xhr.onload = function(){
+                var data = JSON.parse(this.response)
+                console.log(data)
+                renderDOM(data)
+            }
+
+        }
+
+
+        function renderDOM(data){
+            var arr = data.codenames
+            var res = document.getElementById('res')
+
+            arr.forEach(function(val){
+              var div = createCard(val)
+               res.append(div)
+            })
+
+        }
+
+        function createCard(val){
+            var div = document.createElement('div')
+
+            var name = document.createElement('div')
+            name.style.padding= "15px"
+            name.innerText = "name :"+val.name
+
+            var version = document.createElement('div')
+            version.style.padding= "15px"
+
+            version.innerText = "version :" + val.version
+
+            div.append(name,version)
+            div.style.border = "1px solid black"
+            return div
+
+        }
+        window.addEventListener('load', function () {
+            var btn = document.getElementById('button')
+            btn.addEventListener('click', getData)
+        })
+    </script>
+</body>
+
+</html>
